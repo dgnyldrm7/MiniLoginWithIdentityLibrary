@@ -12,6 +12,6 @@ namespace MiniLoginWithIdentityLibrary.Controllers
             return View();
         }
 
-     
+
     }
 }

@@ -1,7 +1,27 @@
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using MiniLoginWithIdentityLibrary.Models;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+
+//database Baðlama iþlemi
+builder.Services.AddDbContext<IdentityContext>( options =>
+{
+    var config = builder.Configuration;
+    var ConnectionString = config.GetConnectionString("database");
+    options.UseSqlite(ConnectionString);
+} );
+
+
+//Role baðlama iþlemlerini yazalým
+builder.Services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<IdentityContext>();
+
+
+
 
 var app = builder.Build();
 
